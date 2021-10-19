@@ -1,3 +1,4 @@
+#include "PWM.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
@@ -5,23 +6,26 @@
 #include "IO.h"
 #include "timer.h"
 
-int main (void) {
+int main(void) {
 
-// Initialisation de l?oscillateur
-    
+    // Initialisation de l'oscillateur
     InitOscillator();
-    InitTimer23();
+
+    // Configuration de entrées s o r t i e s
+    InitIO();
+    LED_BLANCHE = 1;
+    LED_BLEUE = 0;
+    LED_ORANGE = 0;
+
+
+    InitPWM();
+    PWMSetSpeed(30, MOTEUR_GAUCHE);
+    PWMSetSpeed(30, MOTEUR_DROIT);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           InitTimer23();
     InitTimer1();
 
-// Configuration de sÃ©entres s o r t i e s
+    // Boucle P r i n c i p a l e
 
-InitIO();
-LED_BLANCHE = 1 ;
-LED_BLEUE = 0 ;
-LED_ORANGE = 0 ;
-
-// Boucle P r i n c i p a l e
-
-while ( 1 ) {
-} // f i n main
+    while (1) {
+    } // f i n main
 }
