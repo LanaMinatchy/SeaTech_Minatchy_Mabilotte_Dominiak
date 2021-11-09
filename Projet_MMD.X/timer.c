@@ -2,6 +2,7 @@
 #include "timer.h"
 #include "IO.h"
 #include "PWM.h"
+#include "ADC.h"
 
 //Initialisation d?un timer 32 bits
 
@@ -28,12 +29,12 @@ unsigned char toggle = 0;
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits.T3IF = 0; // Cle a r Timer3 I n t e r r u p t Flag
     if (toggle == 0) {
-        PWMSetSpeed(40, MOTEUR_DROIT);
-        PWMSetSpeed(40, MOTEUR_GAUCHE);
+        PWMSetSpeedConsigne(37, MOTEUR_DROIT);
+        PWMSetSpeedConsigne(37, MOTEUR_GAUCHE);
         toggle = 1;
     } else {
-        PWMSetSpeed(-40, MOTEUR_DROIT);
-        PWMSetSpeed(-40, MOTEUR_GAUCHE);
+        PWMSetSpeedConsigne(-37, MOTEUR_DROIT);
+        PWMSetSpeedConsigne(-37, MOTEUR_GAUCHE);
         toggle = 0;
     }
 }
@@ -61,5 +62,7 @@ void InitTimer1(void) {
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
     LED_BLANCHE = !LED_BLANCHE;
+    //PWMUpdateSpeed();
+    ADC1StartConversionSequence();
 }
 

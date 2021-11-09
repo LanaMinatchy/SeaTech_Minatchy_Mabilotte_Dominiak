@@ -6,7 +6,7 @@
 #include "Toolbox.h"
 
 #define PWMPER 40.0
-unsigned char acceleration = 20;
+unsigned char acceleration = 5;
 
 void InitPWM(void) {
     PTCON2bits.PCLKDIV = 0b000; //Divide by 1
@@ -27,7 +27,7 @@ void InitPWM(void) {
     /* Enable PWM Module */
     PTCONbits.PTEN = 1;
 }
-
+/*
 void PWMSetSpeed(float vitesseEnPourcents, int moteur) {
 
     if (moteur == MOTEUR_GAUCHE) {
@@ -61,7 +61,7 @@ void PWMSetSpeed(float vitesseEnPourcents, int moteur) {
         }
     }
 }
-
+*/
 void PWMUpdateSpeed()
 {
 // Cette fonction est appelée sur timer et permet de suivre des rampes d?accélération
@@ -104,4 +104,17 @@ MOTEUR_GAUCHE_H_IO_OUTPUT = 1; //Mise à 1 de la pin
 MOTEUR_GAUCHE_L_PWM_ENABLE = 1; //Pilotage de la pin en mode PWM
 }
 MOTEUR_GAUCHE_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante) * PWMPER;
+}
+
+void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur){
+
+    if (moteur==MOTEUR_DROIT)
+        //robotState.vitesseDroiteCommandeCourante=0;
+        robotState.vitesseDroiteConsigne=vitesseEnPourcents;
+        
+    
+    if (moteur==MOTEUR_GAUCHE)
+        //robotState.vitesseGaucheCommandeCourante=0;
+        robotState.vitesseGaucheConsigne=vitesseEnPourcents;
+    
 }
