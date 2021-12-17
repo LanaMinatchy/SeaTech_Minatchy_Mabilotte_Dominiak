@@ -31,8 +31,8 @@ stateRobot = STATE_AVANCE;
 break;
 
 case STATE_AVANCE:
-PWMSetSpeedConsigne(45, MOTEUR_DROIT);
-PWMSetSpeedConsigne(45, MOTEUR_GAUCHE);
+PWMSetSpeedConsigne(40, MOTEUR_DROIT);
+PWMSetSpeedConsigne(40, MOTEUR_GAUCHE);
 stateRobot = STATE_AVANCE_EN_COURS;
 break;
 case STATE_AVANCE_EN_COURS:
@@ -40,7 +40,7 @@ SetNextRobotStateInAutomaticMode();
 break;
 
 case STATE_TOURNE_GAUCHE:
-PWMSetSpeedConsigne(30, MOTEUR_DROIT);
+PWMSetSpeedConsigne(25, MOTEUR_DROIT);
 PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
 stateRobot = STATE_TOURNE_GAUCHE_EN_COURS;
 break;
@@ -49,8 +49,8 @@ SetNextRobotStateInAutomaticMode();
 break;
 
 case STATE_TOURNE_GAUCHE_DOUCEMENT:
-PWMSetSpeedConsigne(30, MOTEUR_DROIT);
-PWMSetSpeedConsigne(12, MOTEUR_GAUCHE);
+PWMSetSpeedConsigne(25, MOTEUR_DROIT);
+PWMSetSpeedConsigne(10, MOTEUR_GAUCHE);
 stateRobot = STATE_TOURNE_GAUCHE_DOUCEMENT_EN_COURS;
 break;
 case STATE_TOURNE_GAUCHE_DOUCEMENT_EN_COURS:
@@ -59,7 +59,7 @@ break;
 
 case STATE_TOURNE_DROITE:
 PWMSetSpeedConsigne(0, MOTEUR_DROIT);
-PWMSetSpeedConsigne(30, MOTEUR_GAUCHE);
+PWMSetSpeedConsigne(25, MOTEUR_GAUCHE);
 stateRobot = STATE_TOURNE_DROITE_EN_COURS;
 break;
 case STATE_TOURNE_DROITE_EN_COURS:
@@ -67,8 +67,8 @@ SetNextRobotStateInAutomaticMode();
 break;
 
 case STATE_TOURNE_DROITE_DOUCEMENT:
-PWMSetSpeedConsigne(12, MOTEUR_DROIT);
-PWMSetSpeedConsigne(30, MOTEUR_GAUCHE);
+PWMSetSpeedConsigne(10, MOTEUR_DROIT);
+PWMSetSpeedConsigne(25, MOTEUR_GAUCHE);
 stateRobot = STATE_TOURNE_DROITE_DOUCEMENT_EN_COURS;
 break;
 case STATE_TOURNE_DROITE_DOUCEMENT_EN_COURS:
@@ -156,27 +156,27 @@ int C = OFF;
 int G = OFF;
 int GG = OFF;        
         
-if(robotState.distanceTelemetreDroit2 < 16){
+if(robotState.distanceTelemetreDroit2 < 18){
     DD=ON;
     LED_ORANGE = 1;}
 else {
     DD=OFF;
     LED_ORANGE = 0;}
-if(robotState.distanceTelemetreDroit < 26)
+if(robotState.distanceTelemetreDroit < 28)
     D=ON;
 else 
     D=OFF;
-if(robotState.distanceTelemetreCentre < 28){
+if(robotState.distanceTelemetreCentre < 30){
     C=ON;
     LED_BLEUE = 1;}
 else {
     C=OFF;
     LED_BLEUE = 0;}
-if(robotState.distanceTelemetreGauche < 26)
+if(robotState.distanceTelemetreGauche < 28)
     G=ON;
 else 
     G=OFF;
-if(robotState.distanceTelemetreGauche2 < 16){
+if(robotState.distanceTelemetreGauche2 < 18){
     GG=ON;
     LED_BLANCHE = 1;}
 else {
