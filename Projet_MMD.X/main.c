@@ -31,8 +31,8 @@ stateRobot = STATE_AVANCE;
 break;
 
 case STATE_AVANCE:
-PWMSetSpeedConsigne(40, MOTEUR_DROIT);
-PWMSetSpeedConsigne(40, MOTEUR_GAUCHE);
+PWMSetSpeedConsigne(30, MOTEUR_DROIT);
+PWMSetSpeedConsigne(30, MOTEUR_GAUCHE);
 stateRobot = STATE_AVANCE_EN_COURS;
 break;
 case STATE_AVANCE_EN_COURS:
@@ -156,27 +156,27 @@ int C = OFF;
 int G = OFF;
 int GG = OFF;        
         
-if(robotState.distanceTelemetreDroit2 < 18){
+if(robotState.distanceTelemetreDroit2 < 15){
     DD=ON;
     LED_ORANGE = 1;}
 else {
     DD=OFF;
     LED_ORANGE = 0;}
-if(robotState.distanceTelemetreDroit < 28)
+if(robotState.distanceTelemetreDroit < 24)
     D=ON;
 else 
     D=OFF;
-if(robotState.distanceTelemetreCentre < 30){
+if(robotState.distanceTelemetreCentre < 26){
     C=ON;
     LED_BLEUE = 1;}
 else {
     C=OFF;
     LED_BLEUE = 0;}
-if(robotState.distanceTelemetreGauche < 28)
+if(robotState.distanceTelemetreGauche < 24)
     G=ON;
 else 
     G=OFF;
-if(robotState.distanceTelemetreGauche2 < 18){
+if(robotState.distanceTelemetreGauche2 < 15){
     GG=ON;
     LED_BLANCHE = 1;}
 else {
