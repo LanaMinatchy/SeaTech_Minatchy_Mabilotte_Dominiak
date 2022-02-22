@@ -23,12 +23,14 @@
         </Grid.ColumnDefinitions>
 
         <GroupBox x:Name="Reception" Header="Réception" Margin="0" Grid.Column="3" Grid.Row="1" >
-            <TextBox x:Name="RichTextBox" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" Background="#FFD127A2" BorderBrush="#FF0532FB" BorderThickness="5"/>
+            <TextBox x:Name="TextBoxReception" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" Background="#FFD127A2" BorderBrush="#FF00FF23" BorderThickness="5"/>
         </GroupBox>
         <GroupBox x:Name="Emission" Header="Envoi" Grid.Column="1" Grid.Row="1">
-            <TextBox x:Name="emissionTextBox" Margin="0" TextWrapping="Wrap" AcceptsReturn="True"  Background="#FF59DCB3" BorderBrush="#FFF7EC05" BorderThickness="5" KeyUp="emissionTextBox_KeyUp" />
+            <TextBox x:Name="TextBoxEmission" Margin="0" TextWrapping="Wrap" AcceptsReturn="True"  Background="#FF59DCB3" BorderBrush="#FFF7EC05" BorderThickness="5" KeyUp="emissionTextBox_KeyUp" />
         </GroupBox>
         <Button x:Name="ButtonEnvoyer" Content="Envoyer" Grid.Column="1" Margin="0" Grid.Row="3" Width="100" Click="ButtonEnvoyer_Click"/>
+        <Button x:Name="ButtonClear" Content="Clear" Grid.Column="3" Margin="0" Grid.Row="3" Width="100" Click="ButtonClear_Click"/>
+        <Button x:Name="ButtonTest" Content="Test" Grid.Column="1" Margin="0" Grid.Row="4" Width="100" Click="ButtonTest_Click"/>
 
 
 
