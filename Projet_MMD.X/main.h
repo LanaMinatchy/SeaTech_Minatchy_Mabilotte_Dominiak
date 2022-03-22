@@ -37,9 +37,7 @@
 #define OBSTACLE_A_GAUCHE 3
 #define OBSTACLE_A_GAUCHE_2 4
 #define OBSTACLE_A_DROITE 5
-
 #define OBSTACLE_A_DROITE_2 6
-#define OBSTACLE_EN_FACE 7
 
 #define ON 0
 #define OFF 1

@@ -1,6 +1,7 @@
 #include "PWM.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <libpic30.h>
 #include <xc.h>
 #include "ChipConfig.h"
 #include "IO.h"
@@ -8,6 +9,7 @@
 #include "ADC.h"
 #include "Robot.h"
 #include "main.h"
+#include "UART.h"
 
 unsigned int ADCValue0; // droit 1
 unsigned int ADCValue1; // centre
@@ -228,7 +230,7 @@ int main(void) {
     //InitTimerPolice();
     InitTimer4();
     InitADC1();
-    
+    InitUART();
 
     // Boucle P r i n c i p a l e
 
@@ -270,5 +272,9 @@ int main(void) {
         else
             LED_BLANCHE = 0;  */  
         }
+        
+        /*SendMessageDirect((unsigned char*) "Bonjour" , 7 ) ;
+        __delay32(40000000);*/
+    }
     } // f i n main
-}
+
