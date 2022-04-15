@@ -5,7 +5,7 @@ void SendMessage(unsigned char* message, int length);
 void CB_TX1_Add(unsigned char);
 unsigned char CB_TX1_Get(void);
 void SendOne();
-unsigned char CB_TX1_IsTranmitting(void);
+unsigned char CB_TX1_IsTransmitting(void);
 int CB_TX1_GetDataSize(void);
 int CB_TX1_GetRemainingSize(void);
 #endif 

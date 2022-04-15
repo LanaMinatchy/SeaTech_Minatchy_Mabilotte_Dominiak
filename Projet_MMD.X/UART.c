@@ -24,7 +24,7 @@ void InitUART(void) {
     IEC0bits.U1TXIE = 1; // Di s a bl e UART Tx i n t e r r u p t
     U1STAbits.URXISEL = 0; // I n t e r r u p t a f t e r one RX c h a r a c t e r i s r e c e i v e d ;
     IFS0bits.U1RXIF = 0; // c l e a r RX i n t e r r u p t f l a g
-    IEC0bits.U1RXIE = 0; // Di s a bl e UART Rx i n t e r r u p t
+    IEC0bits.U1RXIE = 1; // Di s a bl e UART Rx i n t e r r u p t
     U1MODEbits.UARTEN = 1; // Enable UART
     U1STAbits.UTXEN = 1; // Enable UART Tx
 }

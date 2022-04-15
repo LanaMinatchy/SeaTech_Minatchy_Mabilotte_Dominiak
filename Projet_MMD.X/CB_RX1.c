@@ -67,9 +67,6 @@ int CB_RX1_GetDataSize(void)
 
 int CB_RX1_GetRemainingSize( void)
 {
-// r e t u r n s i z e o f rem ainin g s i z e i n c i r c u l a r b u f f e r
-int remainingSize ;
-    remainingSize = CBRX1_BUFFER_SIZE - CB_RX1_GetDataSize();
-return remainingSize ;
+    return  CBRX1_BUFFER_SIZE - CB_RX1_GetDataSize();
 }
 
