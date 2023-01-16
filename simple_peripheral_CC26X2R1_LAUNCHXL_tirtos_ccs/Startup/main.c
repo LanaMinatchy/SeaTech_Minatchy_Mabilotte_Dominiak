@@ -62,6 +62,7 @@
 #include "./TacheADC/TacheADC.h"
 #include "./TacheLCD/TacheLCD.h"
 #include "./Filters/Filter.h"
+#include "./TacheFFTClassification/TacheFFTClassification.h"
 
 #ifdef PTM_MODE
 #include "npi_task.h"
@@ -159,6 +160,8 @@ int main()
   //SimplePeripheral_createTask();
   TacheADC_CreateTask();
   TacheLCD_CreateTask();
+
+  TacheFFTClassification_CreateTask();
 
   /* enable interrupts and start SYS/BIOS */
   BIOS_start();

@@ -15,7 +15,9 @@
 #include <Filters/Filter.h>
 
 #include "ti_drivers_config.h"
+#include "./TacheFFTClassification/TacheFFTClassification.h"
 
+#define FFT_WINDOW_SIZE 256
 #define TacheADC_TASK_PRIORITY 3
 #define TacheADC_TASK_STACK_SIZE 1024
 
@@ -26,6 +28,10 @@ Semaphore_Struct semTacheADCStruct;
 Semaphore_Handle semTacheADCHandle;
 
 static Clock_Struct myClock;
+
+Order1Filter HPFilterAccelNorme;
+float SerieNormeAccel[FFT_WINDOW_SIZE];
+int indexFFT;
 
 Order1Filter LPFilterAccelX;
 Order1Filter LPFilterAccelY;
@@ -62,6 +68,9 @@ void TacheADC_taskFxn(UArg a0, UArg a1){
     InitOrder1HPFilterEuler(&HPFilterAccelY, 1, 100);
     InitOrder1HPFilterEuler(&HPFilterAccelZ, 1, 100);
 
+    // Initialisation des filtres
+    InitOrder1HPFilterEuler(&HPFilterAccelNorme, 1, 100);
+
 
     for (;;){
         Semaphore_pend(semTacheADCHandle, BIOS_WAIT_FOREVER);
@@ -75,18 +84,6 @@ void TacheADC_taskFxn(UArg a0, UArg a1){
         float yG = uVToG_float(DatasampledY);
         float zG = uVToG_float(DatasampledZ);
 
-/*
-        float features[6];
-        features[0]= xG;
-        features[1]= 0;
-        features[2]= yG;
-        features[3]= 0;
-        features[4]= zG;
-        features[5]= 0;
-
-        LCD_PrintState(0, 0, 0, 0, features, 6);
-*/
-
         //Filtre passe-bas sur les 3 axes
         float AccelLPX = ComputeOrder1Filter(&LPFilterAccelX, xG);
         float AccelLPY = ComputeOrder1Filter(&LPFilterAccelY, yG);
@@ -98,7 +95,6 @@ void TacheADC_taskFxn(UArg a0, UArg a1){
         float AccelHPY = ComputeOrder1Filter(&HPFilterAccelY, yG);
         float AccelHPZ = ComputeOrder1Filter(&HPFilterAccelZ, zG);
 
-
         float features[6];
 
         features[0]= AccelLPX;
@@ -108,9 +104,23 @@ void TacheADC_taskFxn(UArg a0, UArg a1){
         features[4]= AccelLPZ;
         features[5]= AccelHPZ;
 
-        LCD_PrintState(0, 0, 0, 0, features, 6);
+        //LCD_PrintState(0, 0, 0, 0, features, 6);
+
+        float normeAccel = sqrtf(AccelHPX*AccelHPX+AccelHPY*AccelHPY+AccelHPZ*AccelHPZ);
+        float normeAccelHP = ComputeOrder1Filter(&HPFilterAccelNorme, normeAccel);
+        SerieNormeAccel[indexFFT] = normeAccelHP;
+        indexFFT++;
+        if(indexFFT>=FFT_WINDOW_SIZE)
+        {
+        //On lance la tache de calcul de la FFT et classification
+        FFTClassificationTrigger(SerieNormeAccel);
+        //Le resultat est recupere dans DataYFFT
+        indexFFT = 0;
+        }
+
     }
 }
+
 
 //Création de Tache
 void TacheADC_CreateTask(void){
