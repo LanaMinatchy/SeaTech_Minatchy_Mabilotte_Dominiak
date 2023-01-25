@@ -15,6 +15,7 @@
 #include "./TacheFFTClassification/FFT.h"
 #include "./TacheFFTClassification/PeakDetector.h"
 #include <TacheLCD/TacheLCD.h>
+#include "./TacheIA/TacheIA.h"
 
 /* Driver configuration */
 #include "ti_drivers_config.h"
@@ -80,6 +81,8 @@ static void TacheFFTClassification_taskFxn(UArg a0, UArg a1)
         float OutPeakDetector[10];
         DetectPeak(3, FFTSerieReal, 128, OutPeakDetector);
         LCD_PrintState(0, 0, 0, 0, OutPeakDetector, 6);
+
+        StartUnsupervisedClassificationOrDetection(FFTSerieReal,FFT_WINDOW_SIZE);
 
 
     }

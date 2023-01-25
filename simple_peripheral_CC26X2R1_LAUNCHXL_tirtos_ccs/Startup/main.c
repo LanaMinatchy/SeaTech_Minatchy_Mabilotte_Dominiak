@@ -63,6 +63,7 @@
 #include "./TacheLCD/TacheLCD.h"
 #include "./Filters/Filter.h"
 #include "./TacheFFTClassification/TacheFFTClassification.h"
+#include "./TacheIA/TacheIA.h"
 
 #ifdef PTM_MODE
 #include "npi_task.h"
@@ -162,7 +163,7 @@ int main()
   TacheLCD_CreateTask();
 
   TacheFFTClassification_CreateTask();
-
+  TacheIA_CreateTask();
   /* enable interrupts and start SYS/BIOS */
   BIOS_start();
 
